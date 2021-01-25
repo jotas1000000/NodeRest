@@ -1,7 +1,8 @@
 require('./config/config');
 const express = require('express');
-const app = express();
 const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
+const app = express();
 
 
 // parse application/x-www-form-urlencoded
@@ -9,23 +10,17 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // parse application/json
 app.use(bodyParser.json());
 
+app.use(require('./routes/usuario'));
 
-app.get('/usuario', (req, res)=>{
-    res.json();
+mongoose.connect(process.env.URLDB,{
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useFindAndModify: false,
+    useCreateIndex: true
+  },(err)=>{
+    if(err) throw new Error('Hubo un problema con la coneccion a base de datos', err)
+    console.log('Base de datos conectada');
 });
-
-app.post('/usuario', (req, res)=>{
-    res.json(req.body);
-});
-
-app.put('/usuario', (req, res)=>{
-    res.json();
-});
-
-app.delete('/usuario', (req, res)=>{
-    res.json();
-});
-
 
 app.listen(process.env.PORT, () => {
     console.log(`servidor corriendo puerto ${process.env.PORT}`);
