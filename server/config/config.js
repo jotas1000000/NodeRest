@@ -18,4 +18,4 @@ if(process.env.NODE_ENV === 'dev') {
     urlDB = 'mongodb+srv://jotasDev:SantaBiblia123@cluster0.ca2rf.mongodb.net/cafe?retryWrites=true&w=majority';
 }
 
-process.env.URLDB = 'mongodb+srv://jotasDev:SantaBiblia123@cluster0.ca2rf.mongodb.net/cafe?retryWrites=true&w=majority';
+process.env.URLDB = urlDB;
