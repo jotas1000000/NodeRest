@@ -2,10 +2,12 @@ const express = require('express');
 const Usuario = require('../models/usuario');
 const bcrypt = require('bcrypt');
 const _ = require('underscore');
+const {verificaToken, verificacionAdmin_Role} = require('../middlewares/autentificacion');
 const app = express();
 
+/*El segundo parametro es un middlewares */
 
-app.get('/usuario', (req, res)=>{
+app.get('/usuario', verificaToken ,(req, res)=>{
 
     let desde = req.query.desde || 0;
     desde = Number(desde);
@@ -37,7 +39,8 @@ app.get('/usuario', (req, res)=>{
     })
 });
 
-app.post('/usuario', (req, res)=>{
+/*El segundo parametro son los middlewares si se necesita mas de un middleware entonces deber ser [function1, function2] */
+app.post('/usuario',[verificaToken,verificacionAdmin_Role] ,(req, res)=>{
 
     let usuario = new Usuario({
         nombre: req.body.nombre,
