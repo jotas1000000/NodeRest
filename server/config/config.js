@@ -1,8 +1,11 @@
+// Para ver todas las variables de entorno personalizadas en heroku tenemos que escribir >>heroku config 
+
+
 /*
 Puerto
 */
 
-process.env.PORT = process.env.PORT || 7777;
+process.env.PORT = process.env.PORT || 3000;
 
 /*Vencimiento del token */
 process.env.CADUCIDAD_TOKEN = 60*60*24*30;
@@ -27,3 +30,9 @@ if(process.env.NODE_ENV === 'dev') {
 }
 
 process.env.URLDB = urlDB;
+
+/*
+
+*/
+
+process.env.CLIENT_ID = process.env.CLIENT_ID || '157957205592-lbbvkgqspjkstgsqpblffttkt91jfdj3.apps.googleusercontent.com';

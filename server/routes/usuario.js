@@ -66,6 +66,7 @@ app.put('/usuario/:id', (req, res)=>{
     /*Con pick seleccionamos que propiedades se podran actualizar */
     let body = _.pick(req.body,['nombre', 'email','role', 'img', 'estado']);
     /*runValidators sirve en este caso para que los enums para role se obedezcan */
+    /* new: true sirve para devolvernos el objeto con sus valores cambiados de lo contrario nos devuelve antes de actualizarse */
     Usuario.findByIdAndUpdate(id , body,{new: true, runValidators: true},(err, usuarioDB) => {
         if (err) {
             return res.status(400).json({
